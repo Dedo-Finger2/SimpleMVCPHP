@@ -13,10 +13,10 @@ final class Core
         // URL sendo requisitada
         $url = ($_SERVER['REQUEST_URI'] != "/") ? $url = rtrim($_SERVER['REQUEST_URI'], '/') : $_SERVER['REQUEST_URI'];
 
+        // Identificador de rotas
         $routerFound = false;
 
         try {
-            
             // Para cada rota, criar o padrão específico com a URI no array associativo
             foreach ($routes as $path => $controller) {
                 
@@ -46,7 +46,7 @@ final class Core
                 ErrorHandle::ErrorRouteNotFound();
             }
         } catch (Exception $e) {
-            echo $e->getMessage();
+            LogErrors::log($e);
         }
     }
 }

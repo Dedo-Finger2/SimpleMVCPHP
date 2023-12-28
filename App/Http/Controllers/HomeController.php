@@ -7,6 +7,7 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
+        
         $this->view("home", [
             'title' => 'Home Page',
             'users' => $users,
