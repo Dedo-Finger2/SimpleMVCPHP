@@ -1,6 +1,6 @@
 <?php
 
-function dd(array $data)
+function dd(mixed $data)
 {
     echo "<h3>Debug</h3>";
     echo "<hr>";

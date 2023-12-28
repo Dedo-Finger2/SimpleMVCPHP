@@ -49,4 +49,67 @@ class Model extends Database
         return $stm->fetch(PDO::FETCH_OBJ);
     }
 
+    public static function create(array $data)
+    {
+        try {
+            $fields = array_keys($data);
+            $fieldsString = implode(",", $fields);
+        
+            $values = array_values($data);
+        
+            // Crie uma string com o número correto de marcadores de posição (?)
+            $prepareValuesString = implode(",", array_fill(0, count($values), "?"));
+        
+            $stm = Database::getConnection()->prepare("INSERT INTO " . static::$table . " ($fieldsString) VALUES ($prepareValuesString)");
+        
+            // Execute a consulta preparada com os valores correspondentes
+            $stm->execute($values);
+
+            return true;
+        } catch (PDOException $e) {
+            LogErrors::log($e);
+            echo "Erro ao inserir dados: " . $e->getMessage();
+        }
+    }
+
+    public static function update(array $data)
+    {
+        try {
+            $id = $data['id'];
+            unset($data['id']);
+    
+            $fields = array_keys($data);
+            $values = array_values($data);
+    
+            // Crie uma string para a parte SET da instrução UPDATE
+            $setClause = implode("=?, ", $fields) . "=?";
+    
+            $stm = Database::getConnection()->prepare("UPDATE " . static::$table . " SET $setClause WHERE id = ?");
+    
+            // Adicione o valor do campo de condição (ID) ao final do array $values
+            $values[] = $id;
+    
+            // Execute a consulta preparada com os valores correspondentes
+            $stm->execute($values);
+
+            return true;
+        } catch (PDOException $e) {
+            LogErrors::log($e);
+            echo "Erro ao atualizar dados: " . $e->getMessage();
+        }
+    }
+
+    public static function delete(array $data)
+    {
+        try {
+            $stm = Database::getConnection()->prepare("DELETE FROM " . static::$table . " WHERE id = ?");
+            $stm->bindParam(1, $data[0], PDO::PARAM_INT);
+            $stm->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            LogErrors::log($e);
+            echo "Erro ao excluir dados: " . $e->getMessage();
+        }
+    }
 }

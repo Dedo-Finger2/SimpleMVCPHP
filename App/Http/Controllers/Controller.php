@@ -29,7 +29,7 @@ class Controller
 
     }
 
-    public function update(array $data)
+    public function update()
     {
 
     }
