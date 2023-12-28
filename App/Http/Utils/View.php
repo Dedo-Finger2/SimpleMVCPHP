@@ -1,8 +1,8 @@
 <?php
 
-class View
+trait View
 {
-    public static function render(string $view, array $args)
+    public function view(string $view, array $args)
     {
         extract($args);
 
