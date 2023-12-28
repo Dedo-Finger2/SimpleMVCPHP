@@ -1,14 +1,14 @@
 <?php
 
-$config = require_once __DIR__ ."/../../database.config.php";
-
 class Database
 {
-    private static ?PDO $connection;
+    private static ?PDO $connection = null;
 
     public static function getConnection()
     {
+        $config = require_once __DIR__ ."/../../database.config.php";
         extract($config);
+
         try {
             if (self::$connection === null) {
                 self::$connection = new PDO(
@@ -20,7 +20,8 @@ class Database
 
             return self::$connection;
         } catch (PDOException $e) {
-        
+            echo $e->getMessage();
+            die();
         }
     }
 }

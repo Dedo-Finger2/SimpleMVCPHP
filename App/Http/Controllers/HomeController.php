@@ -6,9 +6,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $users = User::all();
         $this->view("home", [
             'title' => 'Home Page',
-            'user' => 'Greg',
+            'users' => $users,
         ]);
     }
 }

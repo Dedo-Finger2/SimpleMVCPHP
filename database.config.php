@@ -1,8 +1,8 @@
 <?php
 
 return [
-    "DB_NAME" => "testeMVC",
-    "DB_PASS" => "",
+    "DB_NAME" => "tassgame",
+    "DB_PASS" => "123",
     "DB_USER" => "root",
-    "HOST" => "localhost",
+    "HOST" => "127.0.0.1",
 ];
