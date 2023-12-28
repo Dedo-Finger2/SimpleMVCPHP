@@ -1,0 +1,8 @@
+<?php
+
+return [
+    "DB_NAME" => "",
+    "DB_PASS" => "",
+    "DB_USER" => "root",
+    "HOST" => "127.0.0.1",
+];
