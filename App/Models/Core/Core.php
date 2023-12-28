@@ -11,7 +11,7 @@ final class Core
     public static function run(array $routes)
     {
         // URL sendo requisitada
-        $url = $_SERVER['REQUEST_URI'];
+        $url = ($_SERVER['REQUEST_URI'] != "/") ? $url = rtrim($_SERVER['REQUEST_URI'], '/') : $_SERVER['REQUEST_URI'];
 
         $routerFound = false;
 
