@@ -2,5 +2,5 @@
 
 $routes = [
     '/' => 'HomeController@index',
-    '/users/{id}' => 'UserController@show',
+    '/user/{id}' => 'UserController@show',
 ];

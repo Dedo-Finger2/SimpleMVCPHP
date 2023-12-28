@@ -36,7 +36,7 @@ final class Core
                     // Instanciando um novo objeto e chamando o método de acordo com o que tem no array $routes
                     require_once __DIR__."/../../Http/Controllers/$controllerName.php";
                     $controllerInstance = new $controllerName();
-                    $controllerInstance->$method();
+                    $controllerInstance->$method($matches);
                 }
             }
             

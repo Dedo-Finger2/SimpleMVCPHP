@@ -7,8 +7,8 @@ class UserController
 
     }
 
-    public function show(int $id)
+    public function show(array|int $data)
     {
-
+        echo "Usuário nº{$data[0]}";
     }
 }
