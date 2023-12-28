@@ -1,6 +1,8 @@
 <?php
 
-class UserController
+require_once __DIR__ ."/Controller.php";
+
+class UserController extends Controller
 {
     public function index()
     {
@@ -9,6 +11,13 @@ class UserController
 
     public function show(array|int $data)
     {
-        echo "Usuário nº{$data[0]}";
+        $id = $data[0];
+
+        $user = User::find($id);
+
+        $this->view("users", [
+            'user' => $user,
+        ]);
+
     }
 }

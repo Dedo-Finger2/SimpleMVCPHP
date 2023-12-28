@@ -15,4 +15,23 @@ class Model extends Database
         }
     }
 
+    public static function find(int $id)
+    {
+        try {
+            $stm = Database::getConnection()->prepare("SELECT * FROM ". static::$table . " WHERE ". static::$table."_id = ?");
+            $stm->execute([$id]);
+
+        } catch (PDOException) {
+            try {
+                $stm = Database::getConnection()->prepare("SELECT * FROM ". static::$table . " WHERE id = ?");
+                $stm->execute([$id]);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                die();
+            }
+        }
+
+        return $stm->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

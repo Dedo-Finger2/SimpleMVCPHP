@@ -7,21 +7,21 @@ class Database
     public static function getConnection()
     {
         $config = require_once __DIR__ ."/../../database.config.php";
-        extract($config);
 
         try {
             if (self::$connection === null) {
                 self::$connection = new PDO(
-                "mysql:dbname=$DB_NAME; host=$HOST",
-                $DB_USER, 
-                $DB_PASS
-            );
+                    "mysql:dbname={$config['DB_NAME']};host={$config['HOST']}",
+                    $config['DB_USER'],
+                    $config['DB_PASS']
+                );
+                self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
 
             return self::$connection;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            die();
+            return null; // Retorna null se a conexão falhar
         }
     }
 }
